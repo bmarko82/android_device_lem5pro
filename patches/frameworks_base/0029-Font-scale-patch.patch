@@ -1,0 +1,47 @@
+From bf7cead5280a224df2ac19b88c4d8c7581ec962e Mon Sep 17 00:00:00 2001
+From: Your Name <you@example.com>
+Date: Sat, 6 Jan 2018 09:10:46 +0100
+Subject: [PATCH] Font scale patch
+
+Change-Id: Iabf3c4ef42363a7d6796836d7b53ac2a5f4edf09
+---
+ core/java/android/content/res/Configuration.java | 10 +++++++++-
+ core/java/android/os/Build.java                  |  1 +
+ 2 files changed, 10 insertions(+), 1 deletion(-)
+
+diff --git a/core/java/android/content/res/Configuration.java b/core/java/android/content/res/Configuration.java
+index 0bc1ec2..7836eef 100644
+--- a/core/java/android/content/res/Configuration.java
++++ b/core/java/android/content/res/Configuration.java
+@@ -868,7 +868,15 @@ public final class Configuration implements Parcelable, Comparable<Configuration
+      * Set this object to the system defaults.
+      */
+     public void setToDefaults() {
+-        fontScale = 1;
++        String scale = Build.DEFAULT_FONTSCALE;
++        if ( scale.equalsIgnoreCase( Build.UNKNOWN ) == false )
++        {
++            fontScale = Float.valueOf( Build.DEFAULT_FONTSCALE ).floatValue();
++        }
++        else
++        {
++            fontScale = 1;
++        }
+         mcc = mnc = 0;
+         locale = null;
+         userSetLocale = false;
+diff --git a/core/java/android/os/Build.java b/core/java/android/os/Build.java
+index 2df9be2..e13a1be 100644
+--- a/core/java/android/os/Build.java
++++ b/core/java/android/os/Build.java
+@@ -848,4 +848,8 @@ public class Build {
+             return -1;
+         }
+     }
++    /**
++      * @hide
++      */
++    public static final String DEFAULT_FONTSCALE = getString("ro.property.fontscale");
+ }
+-- 
+2.7.4

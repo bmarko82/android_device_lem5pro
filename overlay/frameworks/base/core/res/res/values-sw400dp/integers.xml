@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <integer name="max_action_buttons">2</integer>
+    <integer name="preferences_left_pane_weight">4</integer>
+    <integer name="preferences_right_pane_weight">6</integer>
+    <integer name="preference_screen_header_scrollbarStyle">0x02000000</integer>
+    <integer name="preference_fragment_scrollbarStyle">0x02000000</integer>
+</resources>
